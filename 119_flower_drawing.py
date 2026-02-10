@@ -1,0 +1,187 @@
+
+#   import turtle
+import turtle as trtl
+import math
+import random
+
+painter = trtl.Turtle()
+painter.speed(0)
+
+
+# draw stem
+painter.color("green")
+painter.pensize(15)
+painter.goto(0, -150)
+painter.setheading(90)
+painter.forward(100)
+
+# draw leaf on stem
+painter.setheading(270)
+painter.circle(20, 120, 20)
+painter.setheading(90)
+painter.goto(0, -60)
+
+# draw complete stem
+painter.forward(60)
+painter.setheading(0)
+
+# change pen to circle to draw flower
+painter.penup()
+painter.shape("circle")
+painter.turtlesize(2)
+
+
+
+# ring third (outer most) flower row
+# painter.color("green")
+painter.goto(20,190)
+
+for petal in range(18):
+  painter.right(20)
+  painter.forward(30)
+  painter.color("green")
+  rem = petal % 2
+  if (rem == 0):
+    painter.color("purple")
+  painter.stamp()
+
+# ring second (middle) flower row
+# painter.color("blue")
+painter.goto(20,160)
+
+for petal in range(12):
+  painter.right(30)
+  painter.forward(30)
+  painter.color("orange")
+  rem = petal % 2
+  if (rem == 0):
+    painter.color("pink")
+  painter.stamp()
+
+
+# ring first (inner most) flower row
+painter.color("blue")
+painter.goto(20,130)
+
+for petal in range(12):
+  painter.right(30)
+  painter.forward(15)
+  painter.stamp()
+
+
+def draw_eye(col, rad, x, y):
+    painter.penup()
+    painter.goto(x, y)
+    painter.pendown()
+    painter.fillcolor(col)
+    painter.begin_fill()
+    painter.circle(rad)
+    painter.end_fill()
+    painter.penup()
+
+
+# # Draw eyes
+# draw_eye('white', 15, -15, 120)
+# draw_eye('black', 5, -35, 130)
+# draw_eye('white', 15, 15, 120)
+# draw_eye('black', 5, 35, 130)
+
+# # Draw the mouth (an arc)
+# painter.color("yellow")
+# painter.goto(-25, 110)
+# painter.pendown()
+# painter.right(90) # Orient the turtle correctly to draw the arc
+# painter.circle(40, 180) # Draw a semi-circle
+# painter.penup()
+
+def draw_sun():
+    # Setup screen
+    screen = trtl.Screen()
+    screen.bgcolor("skyblue")
+    screen.title("Sun with Rays")
+
+    # Create turtle
+    sun = trtl.Turtle()
+    sun.hideturtle()
+    sun.speed(0)  # Fastest drawing speed
+
+    # Draw the sun's circle
+    sun.penup()
+    sun.goto(-250, 150)  # Move to starting position
+    sun.pendown()
+    sun.color("yellow")
+    sun.begin_fill()
+    sun.circle(70)  # Radius of sun
+    sun.end_fill()
+
+    # Draw rays
+    sun.penup()
+    sun.goto(200, 200)
+    sun.pensize(3)
+    ray_length = 150
+    num_rays = 36  # 360 / 10 degrees
+
+    for angle in range(0, 360, int(360 / num_rays)):
+        sun.penup()
+        sun.goto(-250, 220)
+        sun.setheading(angle)
+        sun.forward(70)  # Move to edge of sun
+        sun.pendown()
+        sun.forward(ray_length - 100)  # Draw ray
+        sun.penup()
+
+if __name__ == "__main__":
+    try:
+        draw_sun()
+    except t.Terminator:
+        print("Turtle graphics window closed.")
+
+def draw_blade(x, y, height, color):
+    """Draw a single blade of grass at position (x, y)."""
+    trtl.penup()
+    trtl.goto(x, y)
+    trtl.pendown()
+    trtl.color(color)
+    trtl.setheading(90)  # Point upwards
+    trtl.forward(height)
+    trtl.backward(height)
+
+def draw_grass(num_blades=100):
+    """Draw multiple blades of grass."""
+    trtl.speed(0)
+    trtl.hideturtle()
+
+    # Draw ground
+    trtl.penup()
+    trtl.goto(-400, -100)
+    trtl.pendown()
+    trtl.color("forestgreen")
+    trtl.begin_fill()
+    for _ in range(2):
+        trtl.forward(900)
+        trtl.right(90)
+        trtl.forward(200)
+        trtl.right(90)
+    trtl.end_fill()
+
+    # Draw grass blades
+    for _ in range(num_blades):
+        x = random.randint(-380, 380)
+        y = random.randint(-100, -50)
+        height = random.randint(20, 20)
+        color = random.choice(["green", "limegreen", "seagreen"])
+        draw_blade(x, y, height, color)
+
+if __name__ == "__main__":
+    trtl.setup(width=800, height=600)
+    draw_grass(200)
+    trtl.done()
+
+wn = trtl.Screen()
+wn.mainloop()
+
+
+
+
+
+
